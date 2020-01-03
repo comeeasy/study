@@ -1,0 +1,63 @@
+before sorting
+-----------------------------------------------------
+4 2 11 6 8 6 2 1 3 12 
+------------------------------------------------------
+merge_sort(base, 0, 4)
+merge_sort(base, 0, 2)
+merge_sort(base, 0, 1)
+merge_sort(base, 0, 0)
+out of merge_sort(base, 0, 0)
+merge_sort(bese, 1, 1)
+out of merge_sort(base, 1, 1)
+after partial sort...
+2 4 
+out of merge_sort(base, 0, 1)
+merge_sort(bese, 2, 2)
+out of merge_sort(base, 2, 2)
+after partial sort...
+2 4 11 
+out of merge_sort(base, 0, 2)
+merge_sort(bese, 3, 4)
+merge_sort(base, 3, 3)
+out of merge_sort(base, 3, 3)
+merge_sort(bese, 4, 4)
+out of merge_sort(base, 4, 4)
+after partial sort...
+6 8 
+out of merge_sort(base, 3, 4)
+after partial sort...
+2 4 6 8 11 
+out of merge_sort(base, 0, 4)
+merge_sort(bese, 5, 9)
+merge_sort(base, 5, 7)
+merge_sort(base, 5, 6)
+merge_sort(base, 5, 5)
+out of merge_sort(base, 5, 5)
+merge_sort(bese, 6, 6)
+out of merge_sort(base, 6, 6)
+after partial sort...
+2 6 
+out of merge_sort(base, 5, 6)
+merge_sort(bese, 7, 7)
+out of merge_sort(base, 7, 7)
+after partial sort...
+1 2 6 
+out of merge_sort(base, 5, 7)
+merge_sort(bese, 8, 9)
+merge_sort(base, 8, 8)
+out of merge_sort(base, 8, 8)
+merge_sort(bese, 9, 9)
+out of merge_sort(base, 9, 9)
+after partial sort...
+3 12 
+out of merge_sort(base, 8, 9)
+after partial sort...
+1 2 3 6 12 
+out of merge_sort(base, 5, 9)
+after partial sort...
+1 2 2 3 4 6 6 8 11 12 
+out of merge_sort(base, 0, 9)
+after sorting
+-----------------------------------------------------
+1 2 2 3 4 6 6 8 11 12 
+------------------------------------------------------
