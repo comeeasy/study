@@ -1,0 +1,14 @@
+
+	< 과거로 돌아가기 reset >
+
+	reset 과 revert 가 있음
+
+	$ git reset < commit 주소 > --hard
+		- hard는 위험한 옵션이지만 간단하고 강력함 
+		- 위 프롬프트를 입력하면 해당 commit 주소 보다 위에 있던 commit 들은 
+		  모두 사라짐
+		!- github에 올린 버전이 있다면 절때로 reset 하면 안돼
+
+	$ git revert 
+		- 이런 기능이 있다 정도로만 알고 있으면 됨
+

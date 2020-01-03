@@ -1,0 +1,11 @@
+
+	< Branch Merge >
+
+	* Merge는 기존의 가지친 branch에서 "master branch" 로 병합하는 것이다.
+
+	$ git merge joono
+		- joono branch를 master branch로 merge
+		- 수정 후 commit 을 잘해줘야 merge가 된다.
+
+	$ git branch -d joono
+		- joono branch 를 삭제

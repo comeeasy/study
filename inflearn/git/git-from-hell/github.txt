@@ -1,0 +1,14 @@
+
+	< Git Hub >
+
+	* Fork
+		public repository에서 위 버튼을 눌러 나의 repository로 해당 repo를 copy 할 수 있다.
+
+	$ git clone <remote repo add> < dir name to copy >
+		- 해당 repo의 주소의 master branch에서 나의 dir로 해당 소스들을 copy
+
+	$ git log -reverse
+		- log 가 과거순으로 출력된다.
+
+	$ git checkout <commit 주소>
+		- 해당 commit 주소의 branch로 이동 

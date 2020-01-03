@@ -1,0 +1,31 @@
+
+	< SSH를 이용하여 로그인 없이 원격저장소 이용하기 >
+
+	Secure Shell : SSH
+
+	$ ssh-keygen
+		- ssh를 통해서 다른 컴퓨터로 접속할 수 있는 비밀번호가 생성됨
+		  이 비밀번호는 기계적으로 굉장히 복잡하고, 현재 기술로는 뚫을 수 없음
+
+	위와 같이 생성하면 ~/.ssh dir 에
+		id_rsa		: private
+		id_rsa.pub	: public
+	이 생성된다. id_rsa는 내가 가지고 있는 것이고, id_rsa.pub 은 내가 접속하고자 하는 서버나
+	컴퓨터에 저장하는 것이다.
+
+	id_rsa.pub 을 정교하게 copy 하여 github site 에서 내 프로필을 클릭하여
+	
+		settings -> SSH and GPG keys -> New SSH key
+
+	로 차례대로 들어가 해당 키의 이름을 설정하고 copy 한 id_rsa.pub 을 paste 한다.
+
+	$ git clone <SSH 주소> git-ssh
+	$ vim f1.txt
+	$ git add f1.txt
+	$ git commit -m 1
+	$ git push
+		-> 정상 작동한다.
+		- 기존의 https 방식으로 할 때는 항상 로그인을 해줘야했지만
+		  SSH 방식에서는 항상 로그인 할 필요가 없다. 
+
+ 

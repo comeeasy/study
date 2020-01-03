@@ -1,0 +1,17 @@
+
+	< Branch 정보 확인 >
+
+	$ git log --branches --decorate --graph --oneline
+		- repository 에 존재하는 모든 branch들을 최신 commit에 해당하는 branch를 표시한다.
+		- HEAD -> < branch name >
+		- 위와 같이 입력하면 모든 commit들을 보기좋게 어디서 파생됐고 어디서 병합됐는지 보여준다.
+	
+	$ git log <a-branch>..<b-branch>
+		- a-branch에는 있고, b-branch에는 없는 것을 출력
+
+	$ git log -p <a-branch>..<b-branch>
+		- 소스코드 상의 비교
+
+	$ git diff <a-branch>..<b-branch>
+		- 각각의 branch들의 현재 상태를 비교할 수 있음
+	
