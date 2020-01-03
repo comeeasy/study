@@ -1,0 +1,71 @@
+///////////////// 변수와 입력 사용하기 //////////////////
+
+변수 여러개 한 번에 만들기 :
+	여러개의 변수를 ,로 구분하고 같은 수의 값을 할당해주면 된다.
+
+	x, y, z = 10, 20, 30
+
+변수 삭제하기	:
+	del variable
+
+	// C++ 에서는 new 를 사용하여 메모리 할당을 해줬지만
+	// python 에서는 그것조차 하지 않았고 근데 만약에 정말 
+	// 없애야할 상황이 오면 del로 삭제해라 하고 의도한거같음
+
+빈 변수 만들기	:
+	None을 할당해주면 됨
+	
+	>> x = Node
+	>> x
+	Node
+
+input() :
+	>>> x =  input('문자열을 입력하세요: ')
+	// Hello, World 입력
+	>>> x
+	'Hello, world!'
+
+	와 같이 사용된다. 이는 사용자에게 입력받는 값의 용도를 미리
+	알려줄 때 사용한다. 
+	이는 prompt라도 부르고 python prompt (>>>) 와도 같은 의미
+
+	input()은 반환값으로 string 을 갖는다. 때문에
+	int a, b 에 대하여 적절한 값을 받으려면 casting을 해야한다
+
+	>>> a = int(input('enter integer a'))
+	>>> b = int(input('enter integer b'))
+
+	와 같이 사용해야한다.
+
+	input().split() :
+		한 번의 입력으로 여러개의 변수에 입력하고 싶다면 이 함수를
+		사용 해볼 수 있다.
+
+		split의 결과로 return type은 'list'가 된다.
+		따라서 만약에 a, b 변수에 int 값을 할당 하고 싶으면
+
+		>>> a, b = int( input('두 개의 정수 입력: ').split() )
+		
+		와 같이 입력하면 error가 발생한다. error code 는
+
+		Traceback (most recent call last) :
+		  File "<stdin>", line 1, in <module>
+		TypeError: int() argument must be a string, a byte-like object or
+		a number, not 'list'
+
+		라는 경고문구가 출력된다. 따라서 각자 casting을 해줘야하는 번거로움이
+		발생한다.		
+
+map() 사용하기 :
+	위에서 발생한 issuef를 해결하기 위해 map() 함수를 사용해 볼 수 있다.
+
+	>>> a, b = map( int, input('숫자 두 개를 입력하세요: ').split() )
+
+	위 와 같이 maping해주면 된다.
+
+
+		
+
+
+	
+	
