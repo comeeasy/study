@@ -41,7 +41,7 @@ private	:
 	int sales_result;
 	double bonus_ratio;
 public		:
-	Sales_worker(const char* _name, int money, double ratio) : Permanent_worker(_name, money)
+	Sales_worker(const char* _name, int money, double ratio) : Permanent_worker(_name, money),
 																sales_result(0), bonus_ratio(ratio) {}
 	void add_sales_result(int value) { sales_result += value; }
 	int get_pay() const { return Permanent_worker::get_pay() + (int)(sales_result*bonus_ratio); }
@@ -49,7 +49,7 @@ public		:
 		show_your_name();
 		cout << "salary: " << get_pay() << endl << endl;
 	}
-}
+};
 
 class Employee_handler {
 private	:
@@ -81,7 +81,13 @@ int main() {
 
 	handler.add_employee(new Permanent_worker("Kim", 1000));
 	handler.add_employee(new Permanent_worker("Lee", 1500));
-	handler.add_employee(new Permanent_worker("Jun", 2000));
+
+	Temporary_worker* alba = new Temporary_worker("Jung", 700);
+	alba->add_work_time(5);
+	handler.add_employee(alba);
+
+	Sales_worker* seller = new Sales_worker("Hong", 1000, 0.1);
+	seller->add_sales_result(7000);
 
 	handler.show_all_salary_info();
 	handler.show_total_salary();

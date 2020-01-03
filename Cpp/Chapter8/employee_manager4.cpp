@@ -8,6 +8,8 @@ private	:
 public		:
 	Employee(const char* _name) { strcpy(name, _name); }
 	void show_your_name() const { cout << "name: " << name << endl; }
+	virtual int get_pay() const = 0;
+	virtual void show_salary_info() const = 0;
 };
 
 class Permanent_worker : public Employee {
@@ -41,7 +43,7 @@ private	:
 	int sales_result;
 	double bonus_ratio;
 public		:
-	Sales_worker(const char* _name, int money, double ratio) : Permanent_worker(_name, money)
+	Sales_worker(const char* _name, int money, double ratio) : Permanent_worker(_name, money),
 																sales_result(0), bonus_ratio(ratio) {}
 	void add_sales_result(int value) { sales_result += value; }
 	int get_pay() const { return Permanent_worker::get_pay() + (int)(sales_result*bonus_ratio); }
@@ -49,7 +51,7 @@ public		:
 		show_your_name();
 		cout << "salary: " << get_pay() << endl << endl;
 	}
-}
+};
 
 class Employee_handler {
 private	:
@@ -59,13 +61,13 @@ public		:
 	Employee_handler() : emp_num(0) {}
 	void add_employee(Employee* emp) { emp_list[emp_num++] = emp; }
 	void show_all_salary_info() const {
-		//for(int i=0; i<emp_num; ++i)
-		//	emp_list[i]->show_salary_info();
+		for(int i=0; i<emp_num; ++i)
+			emp_list[i]->show_salary_info();
 	}
 	void show_total_salary() const {
 		int sum = 0;
-		//for(int i=0; i<emp_num; ++i) 
-		//	sum += emp_list[i]->get_salary();
+		for(int i=0; i<emp_num; ++i) 
+			sum += emp_list[i]->get_pay();
 		cout << "Total salary: " << sum << endl;
 	}	
 	~Employee_handler() {
@@ -81,7 +83,13 @@ int main() {
 
 	handler.add_employee(new Permanent_worker("Kim", 1000));
 	handler.add_employee(new Permanent_worker("Lee", 1500));
-	handler.add_employee(new Permanent_worker("Jun", 2000));
+
+	Temporary_worker* alba = new Temporary_worker("Jung", 700);
+	alba->add_work_time(5);
+	handler.add_employee(alba);
+
+	Sales_worker* seller = new Sales_worker("Hong", 1000, 0.1);
+	seller->add_sales_result(7000);
 
 	handler.show_all_salary_info();
 	handler.show_total_salary();
