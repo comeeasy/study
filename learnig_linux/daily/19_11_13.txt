@@ -1,0 +1,47 @@
+한창 마인크래프트를 깔고 삭제하고 깔아도 실행할 수 없는 바이너리 파일이라
+알아보니 minecraft-pi 버전은 라즈베리파이, specific한 환경에서만 돌아가도록
+컴파일 된거라 랩탑 환경에서는 사용하기 어려울거라는 답변을 보았다. ㅇ
+
+그래서 다시 마크 홈페이지에 들어가 minecraft-java 버전이 있는 것을 보았고
+열심히 구글링을 해서 이것저것 터미널에 상에서 실행시켜보았지만 모두 실패였고
+시간이 부족하여 다음 날 마무리 짓고자 노트북을 덮고 다음 날인 오늘 다시 
+컴퓨터를 켜보니 
+
+	Malformed entry line 52: ~~~ 와 같은 에러문구와 함께 
+	Error : BrokenCount > 0 
+
+이라는 에러문구가 발생하였다. 
+
+	/etc/apt/source.list
+
+상에서 생긴 에러였는데 52번째 라인에서 문제가 발생하였다고 했다. 따라서
+
+	$ cat -n /etc/apt/source.list
+
+cat -n 은 출력되는 문구 왼쪽에 행번호를 붙이는 옵션이다.
+를 터미널 상에서 실행하였고, 52번째 라인에
+
+	#deb-src http://archive.canonical.com/ lucide parter
+
+이라는 third party repository 라고 하는 소스가 있었다.
+아마 apt 명령어를 실행하면 이곳에서 소스를 받아서 하는거 같은데 
+주석처리를 하고 구글링을 좀 해보니
+
+	$ sudo apt-get update -f
+
+를 실행하면 될거라고 했고 그전에도 해보진 못했지만 소프트웨어 관리자가 
+업데이트가 안되니 실행해보라고 했던 명령어였다.
+
+터미널상에서 실행하니 바로 dependency check 와 함께 수정까지하였고
+그 이후로는 업데이트나 인터넷 모두 다 사용가능하게 되었다.
+
+	$ man apt-get
+
+을 실행하여보니 매뉴얼에
+
+	-f, --fix-broken
+		
+		Fix; attemp to correct a system with broken dependencies in place
+		....
+
+와 같이 돼있다. 
