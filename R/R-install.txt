@@ -1,0 +1,32 @@
+
+	< R install >
+
+		// Prerequisites
+			- Ubuntu 12.04 version 이상에서만 작동함
+			- Ubuntu package for R 설치
+				$ sudo apt-get install r-base
+
+		// install for Debian 10 / Ubuntu 18 (or higher)
+			$ sudo apt-get install gdebi-core
+			$ wget httpwget https://download2.rstudio.org/server/trusty/amd64/rstudio-server-1.2.5033-amd64.deb
+			$ sudo gdebi rstudio-server-1.2.5033-amd64.deb
+
+		- 이후 
+			$ rstudio-server status 로 제대로 작동되는지 확인
+			$ ip addr show 
+				하여 본인의 ip 확인
+
+			웹브라우저에 
+			http://127.0.0.1:8787
+			을 입력하면 로그인 창이 뜨는데 이곳에
+			리눅스에서 사용하는 사용자와 pswd를 입력하면됨
+
+			만약 방화벽에 막혀 들어가지지 않는다면
+			$ sudo ufw allow 8787
+			하여 8787 포트에 대한 access를 permit해준다
+
+				
+
+
+
+	
