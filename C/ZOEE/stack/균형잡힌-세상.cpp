@@ -1,11 +1,3 @@
-/*
-  input   : 하나 또는 여러줄에 걸쳐서 문자열이 주어진다.
-            각 문자열은 영문 알파벳, 공백, 소괄호, 대괄호 등으로 이루어져 있다.
-            길이는 100글자보다 작거나 같다.
-  output  : 각 죽마다 해당 문자열이 균형을 이루고 있으면, "yes", 아니면 "no"
-            를 출력한다.
-*/
-
 #include <iostream>
 #include <cstring>
 
@@ -28,34 +20,35 @@ public  :
     int tmp = buf[peak--];
     return tmp;
   }
+  int top() {
+    int tmp = buf[peak];
+    return tmp;
+  }
 };
 
 class Checker {
 public  :
   char str[CHAR_MAX+1];
-  Stack s1;
-  Stack s2;
+  Stack s;
 public  :
   void push_str(char* tmp_str) {
     strcpy(str, tmp_str);
   }
   bool is_valid() {
     for(int i=0; i<strlen(str); ++i) {
-      // 소괄호는 s1, 대괄호는 s2
-
-      if( str[i] == '(' ) { s1.push(1); }
+      if( str[i] == '(' ) { s.push(1); }
       else if( str[i] == ')' ) {
-        if( s1.is_empty() ) { return false; }
-        else                { s1.pop(); }
+        if( s.is_empty() || ( s.top() != 1 ) ) { return false; }
+        else                { s.pop(); }
       }
-      else if( str[i] == '[' ) { s2.push(1); }
+      else if( str[i] == '[' ) { s.push(2); }
       else if( str[i] == ']' ) {
-        if( s2.is_empty() ) { return false; }
-        else                { s2.pop(); }
+        if( s.is_empty() || ( s.top() != 2 ) ) { return false; }
+        else                { s.pop(); }
       }
     }
 
-    if( s1.is_empty() && s2.is_empty() )  return true;
+    if( s.is_empty() )  return true;
     else                                  return false;
   }
 };
@@ -64,12 +57,16 @@ void get_string(char* tmp_str) {
   char ch;
   int i=0;
 
-  do {
+  while(1) {
     ch = getchar();
-    tmp_str[i++];
-  } while( ch != '.' );
 
-  tmp_str[i] = '\0';
+    if( ch == '\n' ) continue;
+    if( ch == '.' ) {
+      tmp_str[i] = '\0';
+      break;
+    }
+    tmp_str[i++] = ch;
+  }
 }
 
 int main() {
@@ -78,11 +75,9 @@ int main() {
   while(1) {
     get_string(tmp_str);
 
-    printf("%s", tmp_str);
-    if( !strcmp(".", tmp_str) ) break;
+    if( tmp_str[0] == '\0' ) break;
 
     Checker ch;
-
     ch.push_str(tmp_str);
     if( ch.is_valid() ) cout << "yes" << endl;
     else                cout << "no" << endl;
