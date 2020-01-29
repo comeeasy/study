@@ -1,0 +1,47 @@
+[1] "b" "c"
+[1] "a" "b"
+Warning in install.packages :
+  installation of package ‘curl’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘TTR’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘quantmod’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘tseries’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘AID’ had non-zero exit status
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    1    2    3    4    5    3
+[2,]    6    7    8    9   10    2
+[3,]   11   12   13   14   15    4
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9
+[4,]   10   11   12
+[5,]   13   14   15
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9
+[4,]   10   11   12
+[5,]   13   14   15
+[1] 4
+[1] 4
+[1] 4
+[1] 4
+[1] 4
+No documentation for ‘R’ in specified packages and libraries:
+you could try ‘??R’
