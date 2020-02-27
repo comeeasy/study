@@ -4,10 +4,9 @@ int main() {
     listGraph g;
 
     g.input_adj_list("./source/graph.txt");
-    cout << "read source successflly\n";
-
-
     g.show_graph();
+
+    g.bfs_adj_list_nonrecur();
 
     return 0;
 }
