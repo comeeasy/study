@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+#include <vector>
 #include "myNode.h"
 
 #define MAX_VERTEX 100
@@ -22,6 +23,7 @@ public  :
     // int i is for recursive method
     void dfs_recur(int i) const;
     void dfs_adj_matrix_nonrecur() const;
+    int count_components() const;
 };
 
 #endif

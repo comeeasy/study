@@ -1,6 +1,5 @@
 #include "./header/adj_matrix.h"
 // for stack, use vector STL
-#include <vector>
 
 matrixGraph::matrixGraph() : V(0), E(0) {}
 void matrixGraph::get_adj_matrix(const char* filename) {
@@ -10,14 +9,9 @@ void matrixGraph::get_adj_matrix(const char* filename) {
     fp = fopen(filename, "r");
     fscanf(fp, "%d %d", &V, &E);
 
-    cout << "V: " << V << " E: " << E << endl;
-
     for(int i=0; i<V; ++i) graph[i][i] = 1;
     for(int i=0; i<E; ++i) {
         fscanf(fp, "%s", vertex);
-
-        cout << vertex << endl;
-
         graph[char_to_int(vertex[0])][char_to_int(vertex[1])] = 1;
         graph[char_to_int(vertex[1])][char_to_int(vertex[0])] = 1;
     }
@@ -54,10 +48,10 @@ void matrixGraph::dfs_recur(int i) const {
 }
 void matrixGraph::dfs_adj_matrix_nonrecur() const {
     vector<int> stack;
-    int check[MAX_VERTAX];
+    int check[MAX_VERTEX];
     int tmp;
 
-    for(int i=0; i<MAX_VERTAX; ++i) check[i] = 0;
+    for(int i=0; i<MAX_VERTEX; ++i) check[i] = 0;
     for(int i=0; i<V; ++i) {
         if(check[i] == 0) {
             stack.push_back(i);
@@ -78,5 +72,37 @@ void matrixGraph::dfs_adj_matrix_nonrecur() const {
             }
         }
     }
+}
 
+int matrixGraph::count_components() const {
+    int cnt = 0, tmp;
+    int check[MAX_VERTEX];
+    vector<int> stack;
+
+    for(int i=0; i<V; ++i) check[i] = 0;
+    for(int i=0; i<V; ++i) {
+        if(check[i] == 0) {
+            // connected componentes mean sapnning tree
+            ++cnt;
+
+            stack.push_back(i);
+            check[i] = 1;
+            while(!(stack.empty())) {
+                tmp = stack.back();
+                stack.pop_back();
+
+                for(int j=0; j<V; ++j) {
+                    if( graph[tmp][j] == 1 ) {
+                        if(check[j] == 0) {
+                            stack.push_back(j);
+                            check[j] = 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "Totally, this graph has " << cnt << " connected components\n";
+    return cnt;
 }

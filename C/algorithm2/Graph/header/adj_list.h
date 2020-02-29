@@ -18,10 +18,12 @@ public :
     listGraph();
     void input_adj_list(const char* source_file);
     void show_graph() const;
-    int char_to_int(char c);
-    char int_to_char(int i);
     void dfs_adj_list_nonrecur() const;
     void bfs_adj_list_nonrecur() const;
+    // too hard..
+    //int ap_non_recur() const; // print articulation point
+    //int ap_recur(int i);
+
 };
 
 #endif
