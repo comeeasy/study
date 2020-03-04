@@ -1,5 +1,6 @@
 #include "./header/myNode.h"
 
+///////////////////////////////////////////////////////
 node::node() : key(0) { next = NULL; }
 node::node(int _key) : key(_key) { next = NULL; }
 node::~node() { delete this; }
@@ -11,3 +12,12 @@ bool node::is_next_null() {
     if(this->next) return 0;
     else     return 1;
 }
+/////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////
+weightedNode::weightedNode(int _vertex, int _weight)
+                : vertex(_vertex), weight(_weight) {
+                    next = NULL;
+                }
+weightedNode::~weightedNode() {delete this;}
+/////////////////////////////////////////////////////////

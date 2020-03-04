@@ -19,4 +19,13 @@ public  :
     bool is_next_null();
 };
 
+class weightedNode {
+public :
+    int vertex;
+    int weight;
+    weightedNode* next;
+
+    weightedNode(int _vertex, int _weight);
+    ~weightedNode();
+};
 #endif

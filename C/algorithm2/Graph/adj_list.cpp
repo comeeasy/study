@@ -162,3 +162,118 @@ int listGraph::ap_recur(int i) {
     }
 }
 */
+
+//////////////////////////////////////////////////////////////
+
+weightedListGraph::weightedListGraph() : V(0), E(0) {
+    for(int i=0; i<MAX_VERTEX; ++i) graph[i] = NULL;
+}
+void weightedListGraph::input_data(const char* file_name) {
+    string buf;
+    int w ,from, to;
+    weightedNode* new_node;
+    ifstream is(file_name);
+
+    if(is.is_open()) {
+        cout << "file is open\n";
+
+        is >> V >> E;
+        for(int i=0; i<E; ++i) {
+            is >> buf >> w;
+            from = char_to_int(buf[0]);
+            to   = char_to_int(buf[1]);
+
+            new_node = new weightedNode(to, w);
+            new_node->next = graph[from];
+            graph[from] = new_node;
+
+            new_node = new weightedNode(from, w);
+            new_node->next = graph[to];
+            graph[to] = new_node;
+        }
+    }
+    else {
+        cout << "file is not valid\n";
+    }
+
+    is.close();
+}
+void weightedListGraph::input_data(int from, int end, int weight) {
+    weightedNode* new_node;
+
+    ++V;
+    ++E;
+
+    new_node = new weightedNode(end, weight);
+    new_node->next = graph[from];
+    graph[from] = new_node;
+
+    new_node = new weightedNode(from, weight);
+    new_node->next = graph[end];
+    graph[end] = new_node;
+}
+void weightedListGraph::show_graph() const {
+    for(int i=0; i<V; ++i) {
+        cout << '|' << int_to_char(i) << "|";
+        for(weightedNode* horse=graph[i]; horse!=NULL; horse=horse->next) {
+            cout << "->" << int_to_char(horse->vertex) << horse->weight;
+        }
+        cout << endl;
+    }
+}
+weightedListGraph* weightedListGraph::pfs_adjlist() {
+    // tuple <weight, vertex>
+    priority_queue< tuple<int, int>, vector< tuple<int, int> >,
+                            greater< tuple<int, int> > > pq;
+    //priority_queue<int, vector<int>, greater<int> > pq;
+    int check[MAX_VERTEX], parent[MAX_VERTEX];
+    int tmp;
+    weightedListGraph wg;
+
+    for(int i=0; i<MAX_VERTEX; ++i) {
+        check[i] = UNSEEN;
+        parent[i] = 0;
+    }
+    input_data("./source/weighted_graph.txt");
+    for(int i=0; i<V; ++i) {
+        if(check[i] == 0) {
+            pq.push(make_tuple(i, 0));
+
+            while(!pq.empty()) {
+                tmp = get<0>(pq.top());
+                pq.pop();
+                for(weightedNode* horse=graph[tmp]; horse!=NULL; horse=horse->next) {
+                    if(check[tmp] == 0 && ) {
+                        pq.push(tmp);
+                        parent[horse->vertex] = tmp;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
