@@ -12,6 +12,7 @@
 #include <string>
 
 #define MAX_VERTEX 100
+#define UNSEEN (-INT_MAX)
 using namespace std;
 
 class listGraph {
@@ -41,7 +42,7 @@ public  :
     void input_data(const char* file_name);
     void input_data(int from, int end, int weight);
     void show_graph() const;
-    void pfs_adjlist();
+    //void pfs_adjlist();
 };
 
 #endif

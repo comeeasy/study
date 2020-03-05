@@ -221,6 +221,7 @@ void weightedListGraph::show_graph() const {
         cout << endl;
     }
 }
+/*
 weightedListGraph* weightedListGraph::pfs_adjlist() {
     // tuple <weight, vertex>
     priority_queue< tuple<int, int>, vector< tuple<int, int> >,
@@ -236,7 +237,7 @@ weightedListGraph* weightedListGraph::pfs_adjlist() {
     }
     input_data("./source/weighted_graph.txt");
     for(int i=0; i<V; ++i) {
-        if(check[i] == 0) {
+        if(check[i] == UNSEEN) {
             pq.push(make_tuple(i, 0));
 
             while(!pq.empty()) {
@@ -251,7 +252,7 @@ weightedListGraph* weightedListGraph::pfs_adjlist() {
             }
         }
     }
-
+*/
 
 
 
