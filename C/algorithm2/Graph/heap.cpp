@@ -71,6 +71,8 @@ int is_2_square(int i) {
     if(i == 1) return 1;
     else       return 0;
 }
+int heap::is_empty() const {return (n == 0 ? 1 : 0);}
+
 void heap::show_heap() const {
     for(int i=1; i<=n; ++i) {
         cout << container[i] << ' ';

@@ -4,7 +4,7 @@ int char_to_int(char c) {return (int)(c-'A');}
 char int_to_char(int i) {return (char)(i+'A');}
 
 set::set() : num_elem(0) {
-    for(int i=0; i<MAX_ELEMENT; ++i) parent[i] = -1;
+    for(int i=0; i<MAX_ELEMENT; ++i) parent[i] = 0;
     for(int i=0; i<MAX_ELEMENT; ++i) height[i] = 0;
 }
 

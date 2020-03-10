@@ -9,6 +9,7 @@
 using namespace std;
 
 class heap {
+private :
     int container[MAX_COMPO];
     int n;      // num of components in heap
 public  :
@@ -17,6 +18,7 @@ public  :
     void push(int key);
     int top() const;
     void pop();
+    int is_empty() const;
 
     void show_heap() const;
 };
