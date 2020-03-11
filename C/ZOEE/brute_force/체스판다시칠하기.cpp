@@ -19,17 +19,62 @@
 */
 
 #include <iostream>
+#include <cstdio>
 
 #define WHITE 1
 #define BLACK 0
 #define MAX_SIZE 50
 using namespace std;
 
+int check(int k, int l, int board[][MAX_SIZE]) {
+
+}
+
 int main() {
-    int N, M;
+    int N, M, color, num_to_correct, min_answer=1000;
+    int board[MAX_SIZE][MAX_SIZE];
 
     //체스판은 M*N이다. (가로 길이 M, 세로 길이 N)
     cin >> N >> M;
-    
+    // for throw \n
+    getchar();
 
+    for(int i=0; i<N; ++i) {
+        for(int j=0; j<M; ++j) {
+            color = getchar();
+            if(color == 'B') board[j][i] = BLACK;
+            else if(color == 'W') board[j][i] = WHITE;
+        }
+        // for throw \n
+        getchar();
+    }
+
+    int i=1^1;
+    cout << "1&0: "<< i << endl;
+
+    /* for test get board
+    for(int i=0; i<N; ++i) {
+        for(int j=0; j<M; ++j) {
+            cout << board[j][i];
+        }
+        cout << endl;
+    }
+    */
+
+    /* 좌측 상단의 좌표값을 받아서 8*8 크기의 수정할 블록을 세는 함수 작성 */
+    for(int i=0; i<=N-8; ++i) {
+        num_to_correct = 0;
+        for(int j=0; j<=M-8; ++j) {
+            for(int k=i; k<i+8; ++k) {
+                for(int l=j; l<j+8; ++l) {
+                    if(!check(k, l, board[l][k]))
+                        ++num_to_correct;
+                }
+            }
+            if(num_to_correct < min_answer) min_answer = num_to_correct;
+        }
+    }
+
+
+    return 0;
 }
