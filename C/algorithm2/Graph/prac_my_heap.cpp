@@ -1,6 +1,39 @@
 #include "./header/my_heap.h"
 
 int main() {
+    heap h1(MAX_HEAP);
+    heap h2(MIN_HEAP);
+    
+    h1.push(10);
+    h1.push(100);
+    h1.push(1000);
+    h1.show_heap();
+
+    cout << "get out of MIN_HEAP\n";
+    h1.pop();
+    h1.show_heap();
+    cout << "get out of MIN_HEAP\n";
+    h1.pop();
+    h1.show_heap();
+
+    h2.push(10);
+    h2.push(100);
+    h2.push(1000);
+    h2.show_heap();
+
+    cout << "get out of MAX_HEAP\n";
+    h2.pop();
+    h2.show_heap();
+    cout << "get out of MAX_HEAP\n";
+    h2.pop();
+    h2.show_heap();
+
+    return 0;
+}
+
+
+/*
+int main() {
     heap h;
 
     h.push(1);
@@ -20,3 +53,4 @@ int main() {
 
     return 0;
 }
+*/

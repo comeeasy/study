@@ -20,51 +20,115 @@
 */
 
 // k번쨰 요소를 upheap, 보통 요소를 추가할 때 사용하므로 ++n 이 들어갈
-void up_heap(int container[], int k) {
+void up_heap(int container[], int k, int config) {
     int v = container[k];
 
-    // 부모 노드가 더 작다면
-    while(container[k/2] <= v) {
-        // insertrion and reindexing
-        container[k] = container[k/2];
-        k /= 2;
+    if(config == MAX_HEAP) {
+        // 부모 노드가 더 작다면
+        while(container[k/2] <= v) {
+            // insertrion and reindexing
+            container[k] = container[k/2];
+            k /= 2;
+        }
+        // assign appropriate value
+        container[k] = v;
     }
-    // assign appropriate value
-    container[k] = v;
+    else {
+        // 부모 노드가 더 작다면
+        while(container[k/2] >= v) {
+            // insertrion and reindexing
+            container[k] = container[k/2];
+            k /= 2;
+        }
+        // assign appropriate value
+        container[k] = v;
+    }
+}
+void up_heap_weight(weightedNode* graph[], int container[], int k, int config, int by) {
+    if(by == BY_KEY) {up_heap(container, k, config);}
+    else if(by == BY_WEIGHT) {
+        int v = graph[container[k]].weight;
+
+        if(config == MAX_HEAP) {
+            while(graph[container[k/2]].weight <= v) {
+                container[k] = container[k/2];
+                k /= 2;
+            }
+            container[k] = v;
+        }
+        else {
+            while(graph[container[k/2]].weight >= v) {
+                container[k] = container[k/2];
+                k /= 2;
+            }
+            container[k] = v;
+        }
+    }
 }
 // 마지막 요소를 root 요소와 교환한 뒤 사용할 것이다.
 //  자신의 자리까지 내려가는 함수
-void down_heap(int container[], int n) {
+void down_heap(int container[], int n, int config) {
     int checker, k=1; // for compare
     int v = container[1]; // root component
 
     // n이 마지막 요소의 index이므로 n/2가 마지막 요소의 부모 노드
     // --> n/2까지가 internal node
-    while(k <= n/2) {
-        // checker를 먼저 자식노드로 보냄
-        checker = k<<1;
-        // 왼쪽 자식, 오른쪽 자식중 누가 큰지 결정
-        if(container[checker] < container[checker+1]) ++checker;
-        if(v >= container[checker]) break;
-        container[k] = container[checker];
-        k = checker;
+    if(config == MAX_HEAP) {
+        while(k <= n/2) {
+            // checker를 먼저 자식노드로 보냄
+            checker = k<<1;
+            // 왼쪽 자식, 오른쪽 자식중 누가 큰지 결정
+            if(container[checker] < container[checker+1]) ++checker;
+            if(v >= container[checker]) break;
+            container[k] = container[checker];
+            k = checker;
+        }
+        container[k] = v;
     }
-    container[k] = v;
+    else {
+        while(k <= n/2) {
+            // checker를 먼저 자식노드로 보냄
+            checker = k<<1;
+            // 왼쪽 자식, 오른쪽 자식중 누가 큰지 결정
+            if(container[checker] > container[checker+1]) ++checker;
+            if(v <= container[checker]) break;
+            container[k] = container[checker];
+            k = checker;
+        }
+        container[k] = v;
+    }
 }
 
-heap::heap() : n(0) {
+heap::heap() : n(0), config(MAX_HEAP) {
     container[0] = INT_MAX;
     for(int i=1; i<MAX_COMPO; ++i) container[i] = 0;
+}
+heap::heap(int _config) : n(0), config(_config) {
+    if(config == MIN_HEAP) {
+        container[0] = -(INT_MAX);
+        for(int i=1; i<MAX_COMPO; ++i) container[i] = 0;
+    }
+    else {
+        container[0] = INT_MAX;
+        for(int i=1; i<MAX_COMPO; ++i) container[i] = 0;
+    }
 }
 
 void heap::push(int key) {
     container[++n] = key;
-    up_heap(container, n);
+    up_heap(container, n, config);
+}
+void heap::push(int key, int by) {
+    if(by == BY_KEY) {heap::push(key);}
+    else if(by == BY_WEIGHT) {
+        container[++n] = key;
+        up_heap_weight(container, n, config, by);
+    }
 }
 int heap::top() const {return container[1];}
 void heap::pop() {
     container[1] = container[n--];
-    down_heap(container, n);
+    down_heap(container, n, config);
 }
 int is_2_square(int i) {
     while(i%2 == 0) i /= 2;

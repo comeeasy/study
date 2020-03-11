@@ -29,6 +29,7 @@ public :
     //int ap_non_recur() const; // print articulation point
     //int ap_recur(int i);
 
+    friend void heap::push(int key, int by);
 };
 
 // I can't guarantee if it works..
