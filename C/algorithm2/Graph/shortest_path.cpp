@@ -31,15 +31,17 @@ void shortest_adjlist(weightedNode* graph[], int start, int V) {
 
     tmp = start;
     if(check[tmp] == UNSEEN) {
+        // start 노드를 루트 노드로 만
         parent[tmp] = -1;
         h.push(tmp);
         while(!h.empty()) {
             h.show_heap();
             tmp = h.top(); h.pop();
+            // pq_extract()
             check[tmp] = -check[tmp];
             // visit(tmp);
             for(weightedNode* j=graph[tmp]; j!=NULL; j=j->next) {
-                
+                // 모르겠다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
             }
         }
     }
