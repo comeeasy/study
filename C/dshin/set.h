@@ -1,13 +1,16 @@
 #define TRUE    1
 #define FALSE   0
 
+#define MAX 1024
 /*
     정수를 원소로 가지는 집합, 하나의 집합은 최대 1024개까지의 원소를 저장
     구조체 형 SET에 집합의 원소들은 정수 배열 변수로 표현하고, 집합의
-    원소의 개수는 정수 변수로 표현함, 하나의 집합은 SET* 로 표현함
-typedef sturct set {
-    ...
-} SET;
+    원소의 개수는 정수 변수로 표현함, 하나의 집합은 SET* 로 표현
+*/
+typedef struct set {    // define set
+    int elem[MAX];      // array to store elem
+    int n;              // num of elem
+} SET;                  // define SET
 
 SET* create();
 int member(SET* set, int element);
