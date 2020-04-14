@@ -7,10 +7,10 @@
     구조체 형 SET에 집합의 원소들은 정수 배열 변수로 표현하고, 집합의
     원소의 개수는 정수 변수로 표현함, 하나의 집합은 SET* 로 표현
 */
-typedef struct set {    // define set
-    int elem[MAX];      // array to store elem
-    int n;              // num of elem
-} SET;                  // define SET
+typedef struct set {
+    int elem[MAX];
+    int n;
+} SET;
 
 SET* create();
 int member(SET* set, int element);
