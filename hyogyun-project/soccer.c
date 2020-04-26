@@ -2,6 +2,27 @@
 #include <stdlib.h>
 #include <time.h>
 
+//////////////////////////////////////////////////////////////////////
+
+char get_select();
+int get_ran(int range);
+void print_score(int my_score, int com_score);
+void attack(int* my_score, int* com_score);
+void defence(int* my_score, int* com_score);
+void game_start();
+void game_explanation();
+void game();
+
+////////////////////////////////////////////////////////////////////////
+
+int main() {
+    srand(time(NULL));
+    game();
+    return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
 char get_select() {
     char c;
 
@@ -16,6 +37,11 @@ char get_select() {
     }
 }
 
+// range 1 - n
+int get_ran(int range) {
+    return rand()%range+1;
+}
+
 void print_score(int my_score, int com_score) {
     printf("======================\n");
     printf("    Score\n");
@@ -24,9 +50,10 @@ void print_score(int my_score, int com_score) {
     printf("        %-4d:%+4d\n\n", my_score, com_score);
 }
 
-void attack(int ran, int* my_score, int* com_score) {
-    int dir;
+void attack(int* my_score, int* com_score) {
+    int dir, ran;
 
+    ran = get_ran(6);
     printf("<<골 차기 방향 선택>>");
     printf("왼쪽 아래(1) 왼쪽 위(2)\n");
     printf("가운데 아래(3) 가운데 위(4)\n");
@@ -36,7 +63,7 @@ void attack(int ran, int* my_score, int* com_score) {
     if(dir == ran) {
         printf("No goal!! 상대가 막았습니다. ㅠㅠ\n\n");
     }
-    else if(dir < 1 && dir > 7) {
+    else if(dir < 1 && dir > 6) {
         printf("골이 골대를 벗어났습니다. ㅠㅠ\n\n");
     }
     else {
@@ -45,24 +72,61 @@ void attack(int ran, int* my_score, int* com_score) {
     }
 }
 
-void defence(int ran, int* my_score, int* com_score) {
+void defence(int* my_score, int* com_score) {
+    int dir, ran;
 
+    ran = get_ran(7);
+    printf("<<수비 차기 방향 선택>>");
+    printf("왼쪽 아래(1) 왼쪽 위(2)\n");
+    printf("가운데 아래(3) 가운데 위(4)\n");
+    printf("오른쪽 아래(5) 오른쪽 위(6) : \n");
+    scanf("%d", &dir);
+
+    if(dir == ran) {
+        printf("방어 성공!!\n\n");
+    }
+    else if(ran == 7) {
+        printf("No goal!! 골이 골대를 벗어났습니다.\n\n");
+    }
+    else {
+        printf("상대편 Goal!!!!!\n\n");
+        (*com_score)++;
+    }
 }
 
 void game_start() {
-    int ran;
     int my_score, com_score;
-    int result;
+    int play_time=0;
 
     printf("======================\n");
     printf("    Let's Start!!\n");
     printf("======================\n\n");
 
-    srand(time(NULL));
     while(1) {
-        ran = rand()%7 + 1;
+        ++play_time;
 
-        attack(ran);
+        attack(&my_score, &com_score);
+        print_score(my_score, com_score);
+        defence(&my_score, &com_score);
+        print_score(my_score, com_score);
+
+        if(play_time == 10) {
+            if(my_score > com_score) {
+                printf("You Win!! 축하합니다!!\n\n");
+                printf("계속하려면 아무 키나 누르십시오...");
+                getchar();
+                return;
+            }
+            else if(my_score < com_score) {
+                printf("You lose 다음 기회에..\n\n");
+                printf("계속하려면 아무 키나 누르십시오...");
+                getchar();
+                return;
+            }
+            else {
+                --play_time;
+            }
+        }
     }
 }
 
@@ -92,9 +156,4 @@ void game() {
             case 'q' : return;
         }
     }
-}
-
-
-int main() {
-
 }
