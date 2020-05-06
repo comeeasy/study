@@ -60,9 +60,24 @@ int compare_priority(char op1, char op2) {
     else                return 1; 
 }
 
+/*
+int calculate(char post[]) {
+    Stack* s;
+    int answer;
+
+    stack_init(s);
+    if()    
+
+
+    free(s);
+    return answer;
+}
+*/
+
 int main() {
     Stack* s;
-    char exp[MAX], ch;
+    char exp[MAX], post[MAX], ch;
+    int post_peek = 0;
 
     s = stack_init(s);
     printf("enter infix exp: ");
@@ -75,6 +90,8 @@ int main() {
         if(ch=='*' || ch=='+' || ch=='-' || ch=='/') {
             while(compare_priority(top(s), ch)) {
                 printf("%c", top(s));
+                post[post_peek++] = top(s);
+                
                 pop(s);
             }
             push(s, ch);
@@ -85,20 +102,26 @@ int main() {
         else if(ch == ')') {
             while(top(s) != '(') {
                 printf("%c", top(s));
+                post[post_peek++] = top(s);
+
                 pop(s);    
             }
         }
         else {
             printf("%c", ch);
+            post[post_peek++] = top(s);
+
         }
     }
     while(!stack_is_empty(s)) {
         printf("%c", top(s));
+        post[post_peek++] = top(s);
         pop(s);
     }
 
     printf("\n");
 
+    free(s);
     return 0;
 }
 
