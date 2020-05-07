@@ -12,8 +12,16 @@ typedef struct id {
 } ID;
 
 void validation(ID* id, int id_num_ft, int id_num_bk) {
-    int gender_key = id_num_bk / 1000000;
+    int gender_key;
     int yoon_nyun = 0;
+
+    if(1000000 <= id_num_bk && id_num_bk <5000000) {
+        gender_key = id_num_bk / 1000000;
+    }
+    else {
+        id->validation = 0;
+        return;
+    }
 
     // if 960617
     // year = 96
