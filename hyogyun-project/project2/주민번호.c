@@ -31,7 +31,7 @@ void validation(ID* id, int id_num_ft, int id_num_bk) {
         else if(gender_key == 4)    id->gender = WOMAN;
         else                        {id->validation = 0;}                          
     }
-    else {
+    else if ( 20 < id->year && id->year <=99 ){
         id->year += 1900;
 
         if(gender_key == 1)         id->gender = MAN;
