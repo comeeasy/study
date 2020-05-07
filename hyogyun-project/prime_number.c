@@ -29,6 +29,7 @@ int main() {
     scanf("%d", &row);
 
     init_prime();
+
     for(int i=1; i<=row; ++i) {
         for(int j=0; j<(row-i); ++j) {
             printf("   ");
@@ -40,6 +41,7 @@ int main() {
         }
             printf("\n");
     }
+    
     printf("\n\n");
     printf("출력한 소수의 총 합은 %d 입니다.  \n\n", sum);
     return 0;
