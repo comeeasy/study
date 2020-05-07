@@ -97,6 +97,8 @@ int main() {
     scanf("%d", &id_num_bk);
 
     validation(&id, id_num_ft, id_num_bk);
+    
+#if 01
     if(id.validation) {
         printf("%d년 %d월 %d일 출생, %d세", id.year, id.month,id.day, 2021-id.year);
         if(id.gender == MAN) printf("남성입니다\n");
@@ -105,6 +107,6 @@ int main() {
     else {
         printf("잘못된 입력입니다.\n");
     }
-
+#endif
     return 0;   
 }

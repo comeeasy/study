@@ -8,7 +8,7 @@ void init_prime() {
     // 0 is not prime num
     prime[1] = 0;
     
-    // 에라토스테네스의 체
+    // 자신을 제외한 배수를 0으로 바꾸어줌
     for(int i=2; i<MAX-1; ++i) {
         if(prime[i]) {
             for(int j=i+i; j<MAX; j+=i) {
@@ -16,8 +16,6 @@ void init_prime() {
             }
         }
     }
-
-    //for(int i=0; i<100; ++i) printf("%d ", prime[i]);
 }
 
 int main() {
