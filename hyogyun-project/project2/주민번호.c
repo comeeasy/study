@@ -48,6 +48,10 @@ void validation(ID* id, int id_num_ft, int id_num_bk) {
             id->validation = 0; 
         }        
     }
+    else {
+        id->validation = 0;
+        return;
+    }
 
     // month validatio check
     if(id->month >= 1 && id->month <=12) 
