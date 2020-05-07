@@ -24,6 +24,7 @@ int main() {
 
     if(number < 1 || number > 1000) {
         printf("1부터 1000이하의 자연수를 입력하세요.\n");
+        return 0;
     }
     for(int i=1; i<=number && i<1000; ++i) {
         if(cnt = clap(i)) {
