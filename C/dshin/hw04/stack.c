@@ -45,11 +45,8 @@ int push_stack(STACK* s, int item) {
 // =======================================================
 
 int pop_stack(STACK* s) {
-    int tmp = s->data[s->top];
-
     if(!empty_stack(s)) {     
-        (s->top)--;
-        return tmp;
+        return s->data[s->top--];
     }
     else {
         return ERROR;
@@ -57,3 +54,8 @@ int pop_stack(STACK* s) {
 }
 
 // =======================================================
+
+13
+14
+23
+25
