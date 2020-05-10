@@ -50,24 +50,33 @@ void search(MAZE* maze) {
     char tile;
 
     //동
-    tile = *(maze->map[maze->here_r] + maze->here_c+1);
-    if(tile == '0' || tile == 'x') {
-        push_loc(maze, maze->here_r, maze->here_c+1);
+    // 현재위치의 column이 벽에 붙어 있다면 
+    if(maze->here_c < MAX_MAZE_SIZE-1) {
+        tile = *(maze->map[maze->here_r] + maze->here_c+1);
+        if(tile == '0' || tile == 'x') {
+            push_loc(maze, maze->here_r, maze->here_c+1);
+        }
     }
     //남
-    tile = *(maze->map[maze->here_r + 1] + maze->here_c);
-    if(tile == '0' || tile == 'x') {
-        push_loc(maze, maze->here_r + 1, maze->here_c);
+    if(maze->here_r < MAX_MAZE_SIZE-1) {
+        tile = *(maze->map[maze->here_r + 1] + maze->here_c);
+        if(tile == '0' || tile == 'x') {
+            push_loc(maze, maze->here_r + 1, maze->here_c);
+        }
     }
-     //서
-    tile = *(maze->map[maze->here_r] + maze->here_c-1);
-    if(tile == '0' || tile == 'x') {
-        push_loc(maze, maze->here_r, maze->here_c-1);
+    //서
+    if(maze->here_c > 0) {
+        tile = *(maze->map[maze->here_r] + maze->here_c-1);
+        if(tile == '0' || tile == 'x') {
+            push_loc(maze, maze->here_r, maze->here_c-1);
+        }
     }
     //북
-    tile = *(maze->map[maze->here_r - 1] + maze->here_c);
-    if(tile == '0' || tile == 'x') {
-        push_loc(maze, maze->here_r-1, maze->here_c);
+    if(maze->here_r > 0) {
+        tile = *(maze->map[maze->here_r - 1] + maze->here_c);
+        if(tile == '0' || tile == 'x') {
+            push_loc(maze, maze->here_r-1, maze->here_c);        
+        }
     }
 }
 
@@ -97,5 +106,4 @@ int run_maze(MAZE* maze) {
         return FINDING;
     }
 }
-
 // =======================================================
