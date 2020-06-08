@@ -52,17 +52,10 @@ NODE* add_list(NODE* list, int item) {
 // list의 맨 앞 node를 제거한 후 수정된 list의 주소를
 // return 한다. (return NULL)
 NODE* delete_list(NODE* list) {
-    NODE* tmp1, *tmp2;
+    NODE* tmp;
 
-    tmp1 = list;
-    if(length_list(list) > 0) {
-        do {
-            tmp2 = tmp1->link;
-            free(tmp1);
-            tmp1 = tmp2;
-        } while(tmp2 != NULL);
-    }
-    else return NULL;
+    tmp = list->link;
+    free(list);
+
+    return tmp;
 }
-
-// ============================================================
