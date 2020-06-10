@@ -1,26 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "queue.h"
+#include "sample.h"
 
 int main() {
+    Sample* sample;     
 
-    // elem queue list
-    Queue* sample;
-    element tmp_elem;
-    FILE* fp;
-
-    sample = init_queue(sample);
-
-    if( !(fp = fopen("sample1.snd", "rb")) ) {
-        printf("파일을 여는데 실패했습니다.\n프로그램 종료\n");
-        return 0;
-    }
-
-    while( fscanf(fp, "%c", &tmp_elem) != EOF) {
-        enqueue(sample, tmp_elem);
-    }
-
-    fclose(fp);
+    sample = init_sample(sample);
+    sample = get_sample(sample);
+    
+    window(sample, 500);
 
     return 0;
 }
