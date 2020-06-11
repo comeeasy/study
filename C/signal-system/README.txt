@@ -4,7 +4,16 @@ cos, sin, atan2 등의 함수들이 reference가 존재하지 않는다하여
 g++로 compile하였다.
 
 실행 환경은 WSL2 에서 실행하였으며
-DISTRIB_ID=Ubuntu                                                                                                    DISTRIB_RELEASE=20.04                                                                                                DISTRIB_CODENAME=focal                                                                                               DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"                                                                               NAME="Ubuntu"                                                                                                        VERSION="20.04 LTS (Focal Fossa)"                                                                                    ID=ubuntu                                                                                                            ID_LIKE=debian                                                                                                       PRETTY_NAME="Ubuntu 20.04 LTS"                                                                                       VERSION_ID="20.04"   
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
+NAME="Ubuntu"                                                                                                        
+VERSION="20.04 LTS (Focal Fossa)"                                                                                    
+ID=ubuntu                                                                                                            
+ID_LIKE=debian                                                                                                       
+PRETTY_NAME="Ubuntu 20.04 LTS"                                                                                       
+VERSION_ID="20.04"   
 위와 같다
 
 
