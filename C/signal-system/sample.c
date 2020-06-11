@@ -27,7 +27,6 @@ Sample* get_sample(Sample* sample) {
 
     int i=0;
     while( fscanf(fp, "%c", &((sample + i)->elem) ) != EOF) {
-        //printf("elem[%d] = %d is input\n", i, (int)(sample + i)->elem);
         ++i;
     }
 
@@ -39,21 +38,23 @@ Sample calculate_X_k(Sample* sample, int k, int N) {
     Sample tmp;
     //int N = end - start;
     double real = 0.0, imaginary = 0.0;
+    char x[FILE_SIZE];
 
     for(int i=0; i<FILE_SIZE; ++i) {
-                // x[n]
-        real += ((sample + i)->elem)*cos(2*M_PI*k*i/N);
-        //printf("x[%4d]: %5d, N: %d, kn: %12d, cos: %12f\n",i, (sample+i)->elem, N, k*i, cos(2*M_PI*k*i/N));
+        x[i] = (sample+i)->elem;
     }
 
     for(int i=0; i<FILE_SIZE; ++i) {
                 // x[n]
-        imaginary -= ((sample + i)->elem)*sin(2*M_PI*k*i/N);
+        real += x[i]*cos(2*M_PI*k*i/N);
     }
 
-    //printf("real: %12f, imaginary: %12f\n", real, imaginary);
+    for(int i=0; i<FILE_SIZE; ++i) {
+                // x[n]
+        imaginary -= x[i]*sin(2*M_PI*k*i/N);
+    }
 
-    tmp.elem = 0;
+    tmp.elem = (sample+k)->elem;
     tmp.real = real;
     tmp.imaginary = imaginary;
 
@@ -71,69 +72,36 @@ Sample* rectangular_func(Sample* sample, int start, int end) {
 
 void window(Sample* sample, int N) {
     Sample* cp_sample = init_sample(cp_sample);
-    cp_sample = copy_sample(cp_sample, sample);
+    Sample* rec_sample;
 
-    Sample* rec_sample = init_sample(rec_sample);
-    rec_sample = rectangular_func(cp_sample, 0, 500);
-    for(int i=0; i<FILE_SIZE; ++i) *(cp_sample + i) = calculate_X_k(rec_sample, i, N);
+    for(int i=0; i<FILE_SIZE/N; ++i) {
+            cp_sample = copy_sample(cp_sample, sample);
+            rec_sample = rectangular_func(cp_sample, N*i, N*(i+1));
+            
+            printf("\n=============== window: %d |%d to %d| ===============\n", N, i*N, (i+1)*N);
+            printf("\n주파수 성분\nX[k]\n\n");
+            for(int k=0; k<FILE_SIZE; ++k) *(cp_sample + k) = calculate_X_k(rec_sample, k, N);
 
-    for(int i=0; i<FILE_SIZE; ++i) {
-        printf("X[%4d] | real: %12f, imaginary: %12f\n", i, (cp_sample+i)->real, (cp_sample+i)->imaginary);
-    }
+            for(int i=0; i<N; ++i) {
+                if( (cp_sample+i)->imaginary > 0.01 || (cp_sample+i)->imaginary < -0.01 || (cp_sample+i)->real > 0.01 || (cp_sample+i)->real < -0.01)
+                    printf("X[%4d] | real: %12f, imaginary: %12f\n", i, (cp_sample+i)->real, (cp_sample+i)->imaginary);
+                    //printf("%g\n",(cp_sample+i)->imaginary);
+            }
+
+            printf("\n진폭 스펙트럼\n|Xk|\n\n");
+            for(int i=0; i<N; ++i) {
+                if( (cp_sample+i)->imaginary > 0.01 || (cp_sample+i)->imaginary < -0.01 || (cp_sample+i)->real > 0.01 || (cp_sample+i)->real < -0.01)
+                    printf("|X_%-4d| = %12f\n", i, sqrt((cp_sample+i)->imaginary*(cp_sample+i)->imaginary  + (cp_sample+i)->real*(cp_sample+i)->real ) );
+                    //printf("%g\n", sqrt((cp_sample+i)->imaginary*(cp_sample+i)->imaginary  + (cp_sample+i)->real*(cp_sample+i)->real ) );
+            }
+            
+            printf("\n\n위상 스펙트럼\n<X_k\n\n");
+            for(int i=0; i<N; ++i) {
+                if( (cp_sample+i)->imaginary > 0.01 || (cp_sample+i)->imaginary < -0.01 || (cp_sample+i)->real > 0.01 || (cp_sample+i)->real < -0.01)
+                    printf("<X_%-4d = %3g*PI\n", i, 2*i/(double)N);
+                    //printf("%g*PI\n", 2*i/(double)N);
+            }
+
+            printf("=======================================================\n");
+        }
 }
-
-/*
-void window(Sample* sample, int N) {
-    Sample* cp_sample = init_sample(cp_sample);
-
-    // window size is 500
-    if (N == 500) {
-        printf("window 500\n");
-
-        for(int i=0; i<10; ++i) {
-            for(int j=0; j<500; ++j) {
-                *(cp_sample + 500*i + j) = calculate_X_k(sample, 500*i, 500*i + 500, 500*i + j);
-            }
-        }
-
-        for(int i=0; i<FILE_SIZE; ++i) {
-            printf("X[%d] = %10f, %10f\n", i, (cp_sample+i)->real, (cp_sample+i)->imaginary);
-        }
-    }
-    // window size is 1000
-    else if(N == 1000) {
-        printf("window 1000\n");
-
-
-        for(int i=0; i<5; ++i) {
-            for(int j=0; j<1000; ++j) {
-                cp_sample[1000*i + j] = calculate_X_k(sample, 1000*i + j, 1000*i + j + 1000, 1000*i + j);
-            }
-        }
-        for(int i=0; i<FILE_SIZE; ++i) {
-            printf("X[%d] = %10f, %10f\n", i, (cp_sample+i)->real, (cp_sample+i)->imaginary);
-        }
-    }
-    // window size is 2000
-    else if(N == 2000) {
-        printf("window 2000\n");
-
-
-        for(int i=0; i<2; ++i) {
-            for(int j=0; j<2000; ++j) {
-                cp_sample[2000*i + j] = calculate_X_k(sample, 2000*i + j, 2000*i + j + 2000, 2000*i + j);
-            }
-        }
-        for(int i=4; i<5; ++i) {
-            for(int j=0; j<1000; ++j) {
-                cp_sample[1000*i + j] = calculate_X_k(sample, 1000*i + j, 1000*i + j + 1000, 1000*i + j);
-            }
-        }
-        for(int i=0; i<FILE_SIZE; ++i) {
-            printf("X[%d] = %10f, %10f\n", i, (cp_sample+i)->real, (cp_sample+i)->imaginary);
-        }
-    }
-    
-    free(cp_sample);
-}
-*/
