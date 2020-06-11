@@ -97,9 +97,11 @@ void window(Sample* sample, int N) {
             
             printf("\n\n위상 스펙트럼\n<X_k\n\n");
             for(int i=0; i<N; ++i) {
-                if( (cp_sample+i)->imaginary > 0.01 || (cp_sample+i)->imaginary < -0.01 || (cp_sample+i)->real > 0.01 || (cp_sample+i)->real < -0.01)
-                    printf("<X_%-4d = %3g*PI\n", i, 2*i/(double)N);
-                    //printf("%g*PI\n", 2*i/(double)N);
+                if( (cp_sample+i)->imaginary > 0.01 || (cp_sample+i)->imaginary < -0.01 || (cp_sample+i)->real > 0.01 || (cp_sample+i)->real < -0.01) {
+                    double am = sqrt((cp_sample+i)->imaginary*(cp_sample+i)->imaginary  + (cp_sample+i)->real*(cp_sample+i)->real );
+                    printf("<X_%-4d = %g*PI\n", i, atan2( (cp_sample+i)->imaginary/am, (cp_sample+i)->real / am ) / M_PI );
+                    //printf("%g\n", atan2( (cp_sample+i)->imaginary/am, (cp_sample+i)->real / am ) / M_PI);
+                }
             }
 
             printf("=======================================================\n");
