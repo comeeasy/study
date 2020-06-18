@@ -11,5 +11,6 @@ int main() {
     //window(sample, 1000);
     //window(sample, 2000);
 
+    free(sample);
     return 0;
 }
