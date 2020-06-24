@@ -38,7 +38,6 @@ int partition(element* words, int sorted_index[], int low, int high) {
 void quick_sort(element* words, int sorted_index[], int low, int high) {
     if (low < high) { 
         int q = partition(words, sorted_index, low, high);
-        //printf("pivot [%d:%d]->[%d:%d]\n", low, sorted_index[q], q, sorted_index[q]); 
         quick_sort(words, sorted_index, low, q - 1); 
         quick_sort(words, sorted_index, q + 1, high); 
     }  
