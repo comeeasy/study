@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #include "sort.h"
 
 // ==========================================================
@@ -23,9 +25,48 @@ void SWAP(int* a, int* b) {
     *a ^= *b;
 }
 
+char* characterize(int i, char buf[]) {
+    int digit, num_of_digit=0;
+    int key = dict[i].key;
+    int word_length;
+
+    while(key > 0) {
+        digit = key % 10;
+        key /= 10;
+        buf[num_of_digit] = digit + '0';
+        ++num_of_digit;
+        //printf("digit %d key %d\n", digit, key);
+    }
+
+    //for(int j=0; j<num_of_digit; ++j) printf("buf[%d] = %c\n", j, buf[j]);
+
+    for(int j=0; j<num_of_digit/2; ++j) {
+        char tmp = buf[j];
+        buf[j] = buf[num_of_digit-1-j];
+        buf[num_of_digit-1-j] = tmp;
+    }
+
+    buf[num_of_digit] = ' ';
+    strcpy(&buf[num_of_digit+1], dict[i].word);
+    buf[num_of_digit + strlen(dict[i].word) + 1] = '\n';
+    buf[num_of_digit + strlen(dict[i].word) + 2] = '\0';
+
+    //printf("%s", buf);
+
+    return buf;
+}
+
+int get_pivot(int low, int high) {
+    //printf("%d ", rand()%(high+1) + low);
+    return rand()%(high - low +1) + low;
+}
+
 int partition(int sorted_index[], int low, int high) {
-    int pivot = dict[sorted_index[low]].key;
+    int pivot;
     int left = low+1, right = high;
+
+    SWAP(&sorted_index[low], &sorted_index[get_pivot(low, high)]);
+    pivot = dict[sorted_index[low]].key;
 
     while(1) {
         while( dict[sorted_index[left]].key <= pivot && left <= high ) ++left;
@@ -61,18 +102,22 @@ FILE* get_dictionary(FILE* fp, int* file_size) {
         }
     }
 
+    //printf("file size = %d\n", *file_size-1);
     return fp;
 }
 
 FILE* write_dictionary(FILE* fp, int sorted_index[], int file_size) {
     fp = fopen(DICT_OUT, "w");
+    char buf[WORD_SIZE];
 
     if(fp == NULL) {
         printf("file errer\n");
     }
 
+    
     for(int i=0; i<file_size; ++i) {
-        fprintf(fp, "%d %s\n", dict[sorted_index[i]].key, dict[sorted_index[i]].word);
+        characterize(sorted_index[i], buf);
+        fputs(buf, fp);
     }
 
     return fp;
@@ -82,6 +127,7 @@ void sort() {
     FILE* fp;
     int file_size;
     int sorted_index[DICT_SIZE];
+    srand(time(NULL));
 
     for(int i=0; i<DICT_SIZE; ++i) sorted_index[i] = i;
 
@@ -98,5 +144,14 @@ void sort() {
     fclose(fp);
     return;
 }
+/*
+int main() {
+    dict[0].key = 202216;
+    strcpy(dict[0].word, "Kafkaesque");
+    char buf[WORD_SIZE];
 
+    characterize(0, buf);
+    return 0;
+}
+*/
 // ==========================================================
