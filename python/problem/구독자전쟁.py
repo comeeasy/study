@@ -22,3 +22,19 @@
     P채널과 T채널 모두 구독하고 있는 사람의 수의 최댓값과 최솟값을 공백 하나를 
     사이로 두고 차례대로 출력한다.
 '''
+
+def min_sub(A, B, N) :
+    if A + B > N :
+        return A + B - N
+    else :
+        return 0
+
+T = int(input())
+
+for test_case in range(1, T+1) :    
+    N, A, B = map(int, (input().split()))       
+    
+    max_subscribe = min(A, B)
+    min_subscribe = min_sub(A, B, N)
+    
+    print("#{0} {1} {2}".format(test_case, max_subscribe, min_subscribe))
