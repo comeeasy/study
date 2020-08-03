@@ -17,14 +17,11 @@ for time_stamp in pd.date_range(start='2017-11', periods=19, freq='MS') :
     dates.append("{0}-{1:02}".format(time_stamp.year, time_stamp.month))
 
 # values
-'''
-new_df = []
-for row in df.loc[:] :
-    for line in line_type :
-        to_insert_line = []
-        for row in df[df['노선명'] == line] :
-            to_insert_line.append(row[3])
-'''
+new_matrix = []
+for line in line_type :
+    # num of passengers
+    new_matrix.append([num_p for num_p in df[df['노선명'] == '1호선']['승차총승객수'].to_numpy()])
+
             
 #print(df)
-print(df[df['노선명'] == '1호선']['승차총승객수'].to_numpy())
+new_df = pd.DataFrame(new_matrix, index=dates, columns=line_type)
