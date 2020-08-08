@@ -15,7 +15,7 @@ element dict[DICT_SIZE];
 
 // ==========================================================
 
-void SWAP(int* a, int* b) {
+void SWAP(short* a, short* b) {
     if(*a == *b) return;
 
     *a ^= *b;
@@ -23,7 +23,7 @@ void SWAP(int* a, int* b) {
     *a ^= *b;
 }
 
-int partition(int sorted_index[], int low, int high) {
+int partition(short sorted_index[], int low, int high) {
     int pivot = dict[sorted_index[low]].key;
     int left = low+1, right = high;
 
@@ -38,7 +38,7 @@ int partition(int sorted_index[], int low, int high) {
     return right;
 }
 
-void quick_sort(int sorted_index[], int low, int high) {
+void quick_sort(short sorted_index[], int low, int high) {
     if (low < high) { 
         int q = partition(sorted_index, low, high);
         quick_sort(sorted_index, low, q - 1); 
@@ -65,7 +65,7 @@ FILE* get_dictionary(FILE* fp, int* file_size) {
     return fp;
 }
 
-FILE* write_dictionary(FILE* fp, int sorted_index[], int file_size) {
+FILE* write_dictionary(FILE* fp, short sorted_index[], int file_size) {
     fp = fopen(DICT_OUT, "w");
 
     if(fp == NULL) {
@@ -82,7 +82,9 @@ FILE* write_dictionary(FILE* fp, int sorted_index[], int file_size) {
 void sort() {
     FILE* fp;
     int file_size;
-    int sorted_index[DICT_SIZE];
+    short sorted_index[DICT_SIZE];
+
+    printf("as\n");
 
     for(int i=0; i<DICT_SIZE; ++i) sorted_index[i] = i;
 

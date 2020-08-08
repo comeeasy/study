@@ -27,6 +27,7 @@ Sample* get_sample(Sample* sample) {
 
     int i=0;
     while( fscanf(fp, "%c", &((sample + i)->elem) ) != EOF) {
+        //printf("x[%5d] : %4d\n", i, (sample+i)->elem);
         ++i;
     }
 
@@ -40,19 +41,9 @@ Sample calculate_X_k(Sample* sample, int k, int N) {
     double real = 0.0, imaginary = 0.0;
     char x[FILE_SIZE];
 
-    for(int i=0; i<FILE_SIZE; ++i) {
-        x[i] = (sample+i)->elem;
-    }
-
-    for(int i=0; i<FILE_SIZE; ++i) {
-                // x[n]
-        real += x[i]*cos(2*M_PI*k*i/N);
-    }
-
-    for(int i=0; i<FILE_SIZE; ++i) {
-                // x[n]
-        imaginary -= x[i]*sin(2*M_PI*k*i/N);
-    }
+    for(int i=0; i<FILE_SIZE; ++i) {x[i] = (sample+i)->elem;}
+    for(int i=0; i<FILE_SIZE; ++i) {real += x[i]*cos(2*M_PI*k*i/N);}
+    for(int i=0; i<FILE_SIZE; ++i) {imaginary -= x[i]*sin(2*M_PI*k*i/N);}
 
     tmp.elem = (sample+k)->elem;
     tmp.real = real;
