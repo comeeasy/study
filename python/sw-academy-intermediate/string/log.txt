@@ -1,0 +1,15 @@
+findIndex: 3
+i = 0
+..*
+EOGGXYPVSY
+XYPV
+wrong ch : G
+pattern[j] : V
+pattern[j] : P
+pattern[j] : Y
+pattern[j] : X
+i = 1
+.....*
+EOGGXYPVSY
+    XYPV
+wrong ch : P
