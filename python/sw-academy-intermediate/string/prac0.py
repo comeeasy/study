@@ -50,7 +50,7 @@ def boyer_moore_algo(pattern, toFindString) :
     while(findIndex < len(toFindString)) :
         # 패턴문과 조사할 문자열을 차례대로 비교한다
         
-        print('findIndex: {0}'.format(findIndex))
+        #print('findIndex: {0}'.format(findIndex))
         
         for i in range(0, len(pattern)) :
             # 만약 다른 문자가 있다면 해당 인덱스를 저장하고
@@ -58,38 +58,39 @@ def boyer_moore_algo(pattern, toFindString) :
             # 에 있는 인덱스부터 시작하여 해당 인덱스까지 몇 칸을 shift해야하는지
             # 조사
 
-            print('i = {0}'.format(i))
-
-            print('.' * (findIndex - i - 1), '*', sep='')
-            print(toFindString)
-            print(' ' * (findIndex - len(pattern) + 1) ,pattern, sep='')
+            #print('.' * (findIndex - i), '*', sep='')
+            #print(toFindString)
+            #print(' ' * (findIndex - len(pattern) + 1) ,pattern, sep='')
 
             # 만약 다른 문자라면!
-            if pattern[i] != toFindString[findIndex - i] :
+            if pattern[len(pattern)-1-i] != toFindString[findIndex - i] :
                 wrongChInToFindString = toFindString[findIndex - i]
 
-                print("wrong ch : {0}".format(wrongChInToFindString))
+                #print('pattern: {0}'.format(pattern[len(pattern)-1-i]))
+                #print('toFindString: {0}'.format(toFindString[findIndex-i]))
+                #print("wrong ch : {0}".format(wrongChInToFindString))
                 
                 # 패턴안에 존재하는지?
                 skip = 0
-                for j in range(findIndex-i, -1, -1) :
+                for j in range(len(pattern)-1-i, -1, -1) :
                     
-                    print('pattern[j] : {0}'.format(pattern[j]))
+                    #print('pattern[j: {0}] : {1}'.format(j, pattern[j]))
                     # 존재한다면 적절한 위치로 shift 하도록 findIndex 재조정
                     if pattern[j] == wrongChInToFindString :
-                        skip = i - j + 1
-                    else :
-                        if j == 0 :
-                            skip = len(pattern)  
-                        
+                        break
+                    skip += 1
+                    
+                     
+                #print('skip: {0}'.format(skip))   
                 findIndex += skip
+                break
 
             # 만약 마지막 문자까지 동일하다면 해당 패턴을 찾은것
             if i == len(pattern) - 1 :
                 return 1
             # 그렇지 않다면 새로운 findIndex부터 시작
         
-        print()
+        #print()
     # while문을 빠져나왔다면 찾지 못한 것이므로
     return 0
 
