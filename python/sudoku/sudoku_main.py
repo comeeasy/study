@@ -13,11 +13,7 @@ for testCase in range(1, T+1) :
     print('---------- before -------------')
     sdk.print()
 
-    get_candidate(sdk.matrix)
-    for l in get_empty_loc(sdk.matrix) :
-        print('({0}. {1}), len: {2}'.format(l.row, l.column, len(l.candidate)))
-
-    #play_sdk(sdk.matrix)
+    sdk = play_sdk(sdk)
 
     print('\n---------- after -------------')
     sdk.print()
