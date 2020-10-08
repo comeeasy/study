@@ -20,22 +20,36 @@ def findPattern(s, patternLength, startIdx) :
         else :
             return s[startIdx:startIdx + patternLength] + findPattern(s, patternLength, startIdx + patternLength)
 
-'''
-def solution(s) :
-    for patternLength in range(1, s // 2 + 1) :
-        
+def noneFindPattern(s, patternLength) :
+    searchIdx = noneFindPattern.startIdx + patternLength
+    cnt = 1
 
-    return answer
-'''
+    if noneFindPattern.startIdx > len(s) - patternLength :
+        noneFindPattern.startIdx = len(s)
+        return s[noneFindPattern.startIdx:]
+    else :
+        while(searchIdx <= len(s) - patternLength) :
+            if all(s[noneFindPattern.startIdx] == s[searchIdx + i] for i in range(patternLength)):
+                cnt += 1
+                searchIdx += patternLength
+            else :
+                noneFindPattern.startIdx += 1
+                break
+    
+    if cnt > 1 : 
+        return str(cnt) + s[noneFindPattern.startIdx:noneFindPattern.startIdx + patternLength]
+    else :
+        return s[noneFindPattern.startIdx:noneFindPattern.startIdx + patternLength]
 
-s = "aaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkk" * 100
+s = "ababcdcdababcdcd"
 
 ans = []
 ansLen = []
 for patternLength in range(1, len(s)) :
-    res = findPattern(s, patternLength, 0)
+    noneFindPattern.startIdx = 0
+    res = noneFindPattern(s, patternLength)
     ans.append(res)
     ansLen.append(len(res))
     
-
+print(ans)
 print(ans[ansLen.index(min(ansLen))])
