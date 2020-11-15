@@ -1,3 +1,6 @@
+/**
+ * Goods
+ */
 public class Goods {
     public String name;
     public int price;

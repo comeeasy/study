@@ -6,16 +6,38 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "CodeLens (Launch) - GoodsArray",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "GoodsArray",
+            "projectName": "week4_4a298ad"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Goods<week4_1cea7cde>",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Goods<week4_9b7ea9ac>",
             "request": "launch",
             "mainClass": "Goods",
-            "projectName": "week4_1cea7cde"
+            "projectName": "week4_9b7ea9ac"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GoodsArray<week4_9b7ea9ac>",
+            "request": "launch",
+            "mainClass": "GoodsArray",
+            "projectName": "week4_9b7ea9ac"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MyExp<week4_9b7ea9ac>",
+            "request": "launch",
+            "mainClass": "MyExp",
+            "projectName": "week4_9b7ea9ac"
         }
     ]
 }

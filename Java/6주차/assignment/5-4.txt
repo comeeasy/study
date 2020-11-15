@@ -1,0 +1,33 @@
+obj는 DObject
+line은 Line
+p는 DObject로 upcasting된 Line
+r는 DObject로 upcastring 된 Line
+rect는 ODbject로 upcasting 된 Rect
+circle은 DObject로 upcasting된 Circle
+이다.
+
+이들 모두 super class와 sub class 모두 같은 이름으로 정의된 method가 존재할 때
+각각 가장 최하위에 저장된 method를 호출한다.
+
+따라서 모두 draw라고 정의된 method에 대하여 
+
+obj은	DObject.draw() 를
+line은  	Line.draw() 를
+p는   	Line.draw() 를
+r는	Line.draw() 를
+rect는	Rect.draw() 를
+circle은	Circle.draw() 를 
+호출하기 때문에
+
+결과는
+
+========================
+DObject draw
+Line
+Line
+Line
+Rect
+Circle
+========================
+
+위와 같을 것이다
